@@ -1,6 +1,5 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { PaginationQueryDto } from 'src/common/dto/pagination-query.dto';
 import { Repository } from 'typeorm';
 import { CreateAddressDto } from './dto/create-address.dto';
 import { UpdateAddressDto } from './dto/update-address.dto';
@@ -13,13 +12,8 @@ export class AddressesService {
         private readonly addressRepository: Repository<Address>,
       ) {}
     
-      findAll(paginationQuery: PaginationQueryDto) {
-        const { limit, offset } = paginationQuery;
-        return this.addressRepository.find({
-          relations: ['user'],
-          skip: offset, 
-          take: limit, 
-        });
+      findAll() {
+        return this.addressRepository.find();
       }
     
       async findOne(id: string) {

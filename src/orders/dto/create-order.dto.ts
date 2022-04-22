@@ -1,11 +1,11 @@
-import { IsString } from "class-validator";
+import { IsString, IsNumber } from 'class-validator';
 
 export class CreateOrderDto {
     @IsString()
     readonly date: string;
-    @IsString()
+    @IsNumber()
     readonly amount: number;
-    @IsString()
+    @IsNumber()
     readonly total: number;
   
 }
