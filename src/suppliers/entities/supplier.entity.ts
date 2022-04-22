@@ -1,4 +1,6 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Order } from "src/orders/entities/order.entity";
+import { Column, Entity, JoinColumn, ManyToMany, PrimaryGeneratedColumn } from "typeorm";
+
 
 @Entity()
 export class Supplier{
@@ -14,5 +16,11 @@ export class Supplier{
     email: string;
     @Column()
     phone: string;
+    @ManyToMany(() => Order,
+    (supplier: Order) => supplier.id,
+    {onUpdate: 'CASCADE', onDelete: 'CASCADE'},
+    )
+    @JoinColumn({ name: 'supplier_id'})
+    supplier: Order;
     
 }
