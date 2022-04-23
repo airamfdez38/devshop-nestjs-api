@@ -17,10 +17,10 @@ export class Supplier{
     @Column()
     phone: string;
     @ManyToMany(() => Order,
-    (supplier: Order) => supplier.id,
+    (order: Order) => order.supplier,
     {onUpdate: 'CASCADE', onDelete: 'CASCADE'},
     )
-    @JoinColumn({ name: 'supplier_id'})
-    supplier: Order;
+    @JoinColumn({ name: 'order_id'})
+    order: Order[];
     
 }

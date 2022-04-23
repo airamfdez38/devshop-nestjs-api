@@ -1,6 +1,8 @@
+
 import { Product } from "src/products/entities/product.entity";
 import { Supplier } from "src/suppliers/entities/supplier.entity";
-import { Column, Entity, JoinColumn, ManyToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
+import { User } from "src/users/entities/user.entity";
+import { Column, Entity, JoinColumn, ManyToMany, OneToOne, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
 import { Invoice } from '../../invoices/entities/invoice.entity';
 
 @Entity()
@@ -15,24 +17,32 @@ export class Order{
     total: number;
     
     @ManyToMany(() => Product,
-    (product: Product) => product.id,
+    (product: Product) => product.order,
     {onUpdate: 'CASCADE', onDelete: 'CASCADE'},
     )
     @JoinColumn({ name: 'product_id'})
-    product: Product;
+    product: Product[];
+    
 
     @ManyToMany(() => Supplier,
-    (supplier: Supplier) => supplier.id,
+    (supplier: Supplier) => supplier.order,
     {onUpdate: 'CASCADE', onDelete: 'CASCADE'},
     )
     @JoinColumn({ name: 'supplier_id'})
-    supplier: Supplier;
+    supplier: Supplier[];
 
     @OneToOne(() => Invoice,
-    (invoice: Invoice) => invoice.id,
+    (invoice: Invoice) => invoice.order,
     {onUpdate: 'CASCADE', onDelete: 'CASCADE'},
     )
     @JoinColumn({ name: 'invoice_id'})
     invoice: Invoice;
+    
+    @ManyToOne(() => User,
+    (user: User) => user.order,
+    {onUpdate: 'CASCADE', onDelete: 'CASCADE'},
+    )
+    @JoinColumn({ name: 'user_id'})
+    user: User;
    
 }

@@ -13,7 +13,7 @@ export class Invoice{
     payment_method: string;
 
     @OneToOne(() => Order,
-    (order: Order) => order.id,
+    (order: Order) => order.invoice,
     {onUpdate: 'CASCADE', onDelete: 'CASCADE'},
     )
     @JoinColumn({ name: 'order_id'})

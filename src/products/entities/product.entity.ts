@@ -22,17 +22,12 @@ export class Product{
     price: number;
     @Column()
     category: string;
-    @ManyToOne(() => User,
-    (user: User) => user.id,
-    {onUpdate: 'CASCADE', onDelete: 'CASCADE'},
-    )
-    @JoinColumn({ name: 'user_id'})
-    user: User;
+   
     @ManyToMany(() => Order,
-    (order: Order) => order.id,
+    (order: Order) => order.product,
     {onUpdate: 'CASCADE', onDelete: 'CASCADE'},
     )
     @JoinColumn({ name: 'order_id'})
-    order: Order;
+    order: Order[];
     
 }

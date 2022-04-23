@@ -17,8 +17,11 @@ export class Address{
     city: string;
     @Column()
     country: string;
+
+    // Entities relations
+
     @ManyToOne(() => User,
-    (user: User) => user.id,
+    (user: User) => user.address,
     {onUpdate: 'CASCADE', onDelete: 'CASCADE'},
     )
     @JoinColumn({ name: 'user_id'})

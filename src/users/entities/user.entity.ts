@@ -19,18 +19,21 @@ export class User{
     password: string;
     @Column()
     phone: string;
+
+    
     @OneToMany(() => Order,
-    (order: Order) => order.id,
+    (order: Order) => order.user,
     {onUpdate: 'CASCADE', onDelete: 'CASCADE'},
     )
     @JoinColumn({ name: 'order_id'})
-    order: Order;
+    order: Order[];
+
     @OneToMany(() => Address,
-    (address: Address) => address.id,
+    (address: Address) => address.user,
     {onUpdate: 'CASCADE', onDelete: 'CASCADE'},
     )
     @JoinColumn({ name: 'address_id'})
-    address: Address;
+    address: Address[];
     
     
 }
