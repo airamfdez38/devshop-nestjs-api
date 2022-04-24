@@ -1,9 +1,9 @@
-import { IsString } from "class-validator";
+import { IsString, IsNumber } from 'class-validator';
 
 export class CreateInvoiceDto {
     @IsString()
     readonly date: string;
-    @IsString()
+    @IsNumber()
     readonly amount: number;
     @IsString()
     readonly payment_method: string;
