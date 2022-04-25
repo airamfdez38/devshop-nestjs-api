@@ -2,13 +2,13 @@
 import { Product } from "src/products/entities/product.entity";
 import { Supplier } from "src/suppliers/entities/supplier.entity";
 import { User } from "src/users/entities/user.entity";
-import { Column, Entity, JoinColumn, ManyToMany, OneToOne, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
+import { Column, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn, ManyToOne, OneToMany } from 'typeorm';
 import { Invoice } from '../../invoices/entities/invoice.entity';
 
 @Entity()
 export class Order{
-    @PrimaryGeneratedColumn()
-    id: number;
+    @PrimaryGeneratedColumn()//Primary key
+    id: number; 
     @Column()
     date: string;
     @Column()
@@ -16,7 +16,8 @@ export class Order{
     @Column()
     total: number;
     
-    @ManyToMany(() => Product,
+    // Entities relatiions
+    @OneToMany(() => Product,
     (product: Product) => product.order,
     {onUpdate: 'CASCADE', onDelete: 'CASCADE'},
     )
@@ -24,12 +25,12 @@ export class Order{
     product: Product[];
     
 
-    @ManyToMany(() => Supplier,
+    @ManyToOne(() => Supplier,
     (supplier: Supplier) => supplier.order,
     {onUpdate: 'CASCADE', onDelete: 'CASCADE'},
     )
     @JoinColumn({ name: 'supplier_id'})
-    supplier: Supplier[];
+    supplier: Supplier;
 
     @OneToOne(() => Invoice,
     (invoice: Invoice) => invoice.order,

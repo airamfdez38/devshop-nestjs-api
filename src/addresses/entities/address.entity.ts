@@ -3,7 +3,7 @@ import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "t
 
 @Entity()
 export class Address{
-    @PrimaryGeneratedColumn()
+    @PrimaryGeneratedColumn() //Primary key
     id: number;
     @Column()
     via: string;

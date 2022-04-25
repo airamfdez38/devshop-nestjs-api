@@ -1,10 +1,8 @@
 import { Order } from "src/orders/entities/order.entity";
-import { User } from "src/users/entities/user.entity";
 import { 
     Column,
     Entity,
     JoinColumn,
-    ManyToMany,
     ManyToOne,
     PrimaryGeneratedColumn,} from "typeorm";
 
@@ -23,7 +21,7 @@ export class Product{
     @Column()
     category: string;
    
-    @ManyToMany(() => Order,
+    @ManyToOne(() => Order,
     (order: Order) => order.product,
     {onUpdate: 'CASCADE', onDelete: 'CASCADE'},
     )

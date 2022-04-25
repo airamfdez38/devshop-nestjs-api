@@ -6,12 +6,13 @@ import { UpdateInvoiceDto } from './dto/update-invoice.dto';
 import { Invoice } from './entities/invoice.entity';
 
 @Injectable()
-export class InvoicesService {
+export class InvoicesService {// InvoicesService will be responsible for data storage and retieval.
     constructor(
         @InjectRepository(Invoice)
         private readonly invoiceRepository: Repository<Invoice>,
       ) {}
-    
+      // Interactions with data sources
+      
       findAll() {
         return this.invoiceRepository.find();
       }
@@ -19,7 +20,7 @@ export class InvoicesService {
       async findOne(id: string) {
         const invoice = await this.invoiceRepository.findOne(id);
         if (!invoice) {
-          throw new NotFoundException(`Factura #${id} no encontrada`);
+          throw new NotFoundException(`Factura #${id} no encontrada`); // Exception when the invoice doesn't exist in data source
         }
         return invoice;
       }
@@ -30,7 +31,7 @@ export class InvoicesService {
       }
     
       async update(id: string, updateInvoiceDto: UpdateInvoiceDto) {
-        const invoice = await this.invoiceRepository.preload({
+        const invoice = await this.invoiceRepository.preload({// Preload updates an existing entity. If not exists throws an exception
           id: +id,
           ...updateInvoiceDto,
         });

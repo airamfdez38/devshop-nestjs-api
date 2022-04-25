@@ -6,12 +6,12 @@ import { UpdateOrderDto } from './dto/update-order.dto';
 import { Order } from './entities/order.entity';
 
 @Injectable()
-export class OrdersService {
+export class OrdersService {// OrdersService will be responsible for data storage and retieval.
     constructor(
         @InjectRepository(Order)
         private readonly orderRepository: Repository<Order>,
       ) {}
-    
+      // Interactions with data sources
       findAll() {
         return this.orderRepository.find();
       }
@@ -19,7 +19,7 @@ export class OrdersService {
       async findOne(id: string) {
         const order = await this.orderRepository.findOne(id);
         if (!order) {
-          throw new NotFoundException(`Pedidio #${id} no encontrado`);
+          throw new NotFoundException(`Pedido #${id} no encontrado`);// Exception when the order doesn't exist in data source
         }
         return order;
       }
@@ -30,7 +30,7 @@ export class OrdersService {
       }
     
       async update(id: string, updateOrderDto: UpdateOrderDto) {
-        const order = await this.orderRepository.preload({
+        const order = await this.orderRepository.preload({ // Preload updates an existing entity. If not exists throws an exception
           id: +id,
           ...updateOrderDto,
         });

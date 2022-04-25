@@ -6,12 +6,13 @@ import { UpdateAddressDto } from './dto/update-address.dto';
 import { Address } from './entities/address.entity';
 
 @Injectable()
-export class AddressesService {
+export class AddressesService { // AddressesService will be responsible for data storage and retieval.
     constructor(
         @InjectRepository(Address)
         private readonly addressRepository: Repository<Address>,
       ) {}
-    
+      
+      // Interactions with data sources
       findAll() {
         return this.addressRepository.find();
       }
@@ -19,18 +20,18 @@ export class AddressesService {
       async findOne(id: string) {
         const address = await this.addressRepository.findOne(id);
         if (!address) {
-          throw new NotFoundException(`Dirección #${id} no encontrada`);
+          throw new NotFoundException(`Dirección #${id} no encontrada`); // Exception when the address doesn't exist in data source
         }
         return address;
       }
     
-      create(createAddressDto: CreateAddressDto) {
+      create(createAddressDto: CreateAddressDto) { 
         const address = this.addressRepository.create(createAddressDto);
         return this.addressRepository.save(address);
       }
     
       async update(id: string, updateAddressDto: UpdateAddressDto) {
-        const address = await this.addressRepository.preload({
+        const address = await this.addressRepository.preload({// Preload updates an existing entity. If not exists throws an exception
           id: +id,
           ...updateAddressDto,
         });

@@ -1,6 +1,8 @@
+//DTO's let us create a definition for the shape of a data that is coming into the body of an application request
+
 import { IsString, IsNumber } from 'class-validator';
 
-export class CreateOrderDto {
+export class CreateOrderDto {//All properties are read-only to maintain immutability
     @IsString()
     readonly date: string;
     @IsNumber()

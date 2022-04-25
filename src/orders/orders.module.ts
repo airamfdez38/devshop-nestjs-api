@@ -4,7 +4,7 @@ import { OrdersController } from './orders.controller';
 import { OrdersService } from './orders.service';
 import { Order } from './entities/order.entity';
 
-@Module({
+@Module({//Used to organize application components.
     imports:[TypeOrmModule.forFeature([Order])],
     controllers:[OrdersController],
     providers: [OrdersService]

@@ -12,6 +12,8 @@ export class Invoice{
     @Column()
     payment_method: string;
 
+    // Entities relations
+
     @OneToOne(() => Order,
     (order: Order) => order.invoice,
     {onUpdate: 'CASCADE', onDelete: 'CASCADE'},

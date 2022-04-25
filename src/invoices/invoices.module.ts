@@ -4,7 +4,7 @@ import { Invoice } from './entities/invoice.entity';
 import { InvoicesController } from './invoices.controller';
 import { InvoicesService } from './invoices.service';
 
-@Module({
+@Module({ //Used to organize application components.
     imports:[TypeOrmModule.forFeature([Invoice])],
     controllers:[InvoicesController],
     providers: [InvoicesService]

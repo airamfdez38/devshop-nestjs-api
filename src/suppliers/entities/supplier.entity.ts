@@ -1,5 +1,5 @@
 import { Order } from "src/orders/entities/order.entity";
-import { Column, Entity, JoinColumn, ManyToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinColumn, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 
 @Entity()
@@ -16,7 +16,7 @@ export class Supplier{
     email: string;
     @Column()
     phone: string;
-    @ManyToMany(() => Order,
+    @OneToMany(() => Order,
     (order: Order) => order.supplier,
     {onUpdate: 'CASCADE', onDelete: 'CASCADE'},
     )
