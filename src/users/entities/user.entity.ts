@@ -5,7 +5,7 @@ import { Address } from '../../addresses/entities/address.entity';
 
 @Entity()
 export class User{
-    @PrimaryGeneratedColumn()
+    @PrimaryGeneratedColumn()//Primary key
     id: number;
     @Column()
     name: string;
@@ -20,6 +20,7 @@ export class User{
     @Column()
     phone: string;
 
+      // Entities relatiions
     
     @OneToMany(() => Order,
     (order: Order) => order.user,

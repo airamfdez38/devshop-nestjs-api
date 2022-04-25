@@ -6,7 +6,7 @@ import { Column, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn, ManyToOne
 import { Invoice } from '../../invoices/entities/invoice.entity';
 
 @Entity()
-export class Order{
+export class Order{ //sql table === 'order'
     @PrimaryGeneratedColumn()//Primary key
     id: number; 
     @Column()

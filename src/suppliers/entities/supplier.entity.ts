@@ -4,7 +4,7 @@ import { Column, Entity, JoinColumn, OneToMany, PrimaryGeneratedColumn } from "t
 
 @Entity()
 export class Supplier{
-    @PrimaryGeneratedColumn()
+    @PrimaryGeneratedColumn()//Primary key
     id: number;
     @Column()
     name: string;
@@ -16,6 +16,8 @@ export class Supplier{
     email: string;
     @Column()
     phone: string;
+
+    //Entities relations
     @OneToMany(() => Order,
     (order: Order) => order.supplier,
     {onUpdate: 'CASCADE', onDelete: 'CASCADE'},

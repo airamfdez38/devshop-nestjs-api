@@ -4,7 +4,7 @@ import { Supplier } from './entities/supplier.entity';
 import { SuppliersController } from './suppliers.controller';
 import { SuppliersService } from './suppliers.service';
 
-@Module({
+@Module({//Used to organize application components.
     imports:[TypeOrmModule.forFeature([Supplier])],
     controllers:[SuppliersController],
     providers: [SuppliersService]

@@ -6,12 +6,13 @@ import { UpdateProductDto } from './dto/update-product.dto';
 import { Product } from './entities/product.entity';
 
 @Injectable()
-export class ProductsService {
+export class ProductsService {// ProductsService will be responsible for data storage and retieval.
     constructor(
         @InjectRepository(Product)
         private readonly productRepository: Repository<Product>,
       ) {}
-    
+      // Interactions with data sources
+      
       findAll() {
         return this.productRepository.find();
       }
@@ -19,7 +20,7 @@ export class ProductsService {
       async findOne(id: string) {
         const product = await this.productRepository.findOne(id);
         if (!product) {
-          throw new NotFoundException(`Producto #${id} no encontrado`);
+          throw new NotFoundException(`Producto #${id} no encontrado`);// Exception when the order doesn't exist in data source
         }
         return product;
       }
@@ -35,7 +36,7 @@ export class ProductsService {
           ...updateProductDto,
         });
         if (!product) {
-          throw new NotFoundException(`Producto #${id} no encontrado`);
+          throw new NotFoundException(`Producto #${id} no encontrado`);// Preload updates an existing entity. If not exists throws an exception
         }
         return this.productRepository.save(product);
       }

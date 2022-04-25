@@ -6,12 +6,13 @@ import { UpdateSupplierDto } from './dto/update-supplier.dto';
 import { Supplier } from './entities/supplier.entity';
 
 @Injectable()
-export class SuppliersService {
+export class SuppliersService {// SuppliersService will be responsible for data storage and retieval.
     constructor(
         @InjectRepository(Supplier)
         private readonly supplierRepository: Repository<Supplier>,
       ) {}
-    
+      // Interactions with data sources
+      
       findAll() {
         return this.supplierRepository.find();
       }
@@ -19,7 +20,7 @@ export class SuppliersService {
       async findOne(id: string) {
         const supplier = await this.supplierRepository.findOne(id);
         if (!supplier) {
-          throw new NotFoundException(`Proveedor #${id} no encontrado`);
+          throw new NotFoundException(`Proveedor #${id} no encontrado`);// Exception when the supplier doesn't exist in data source
         }
         return supplier;
       }
@@ -35,7 +36,7 @@ export class SuppliersService {
           ...updateSupplierDto,
         });
         if (!supplier) {
-          throw new NotFoundException(`Proveedor #${id} no encontrado`);
+          throw new NotFoundException(`Proveedor #${id} no encontrado`);// Preload updates an existing entity. If not exists throws an exception
         }
         return this.supplierRepository.save(supplier);
       }

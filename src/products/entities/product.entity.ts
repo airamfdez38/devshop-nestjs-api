@@ -8,7 +8,7 @@ import {
 
 @Entity() //  sql table === 'product'
 export class Product{
-    @PrimaryGeneratedColumn()
+    @PrimaryGeneratedColumn()//Primary key
     id: number;
     @Column()
     name: string;
@@ -20,7 +20,8 @@ export class Product{
     price: number;
     @Column()
     category: string;
-   
+    
+      // Entities relatiions
     @ManyToOne(() => Order,
     (order: Order) => order.product,
     {onUpdate: 'CASCADE', onDelete: 'CASCADE'},

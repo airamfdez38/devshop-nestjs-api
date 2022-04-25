@@ -4,7 +4,7 @@ import { Product } from './entities/product.entity';
 import { ProductsController } from './products.controller';
 import { ProductsService } from './products.service';
 
-@Module({
+@Module({//Used to organize application components.
     imports:[TypeOrmModule.forFeature([Product])],
     controllers:[ProductsController],
     providers: [ProductsService]
