@@ -14,11 +14,16 @@ export class InvoicesService {// InvoicesService will be responsible for data st
       // Interactions with data sources
       
       findAll() {
-        return this.invoiceRepository.find();
+        return this.invoiceRepository.find({
+          relations: ['order']
+        }
+        );
       }
     
       async findOne(id: string) {
-        const invoice = await this.invoiceRepository.findOne(id);
+        const invoice = await this.invoiceRepository.findOne(id, {
+          relations: ['order']
+        });
         if (!invoice) {
           throw new NotFoundException(`Factura #${id} no encontrada`); // Exception when the invoice doesn't exist in data source
         }

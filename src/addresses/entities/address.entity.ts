@@ -1,5 +1,5 @@
 import { User } from "src/users/entities/user.entity";
-import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinColumn, JoinTable, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class Address{
@@ -19,12 +19,13 @@ export class Address{
     country: string;
 
     // Entities relations
-
-    @ManyToOne(() => User,
-    (user: User) => user.address,
+    @JoinTable()
+    @ManyToOne(
+        tupe => User,
+        user => user.address,
+    
     {onUpdate: 'CASCADE', onDelete: 'CASCADE'},
     )
-    @JoinColumn({ name: 'user_id'})
     user: User;
     
 }

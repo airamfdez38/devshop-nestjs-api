@@ -13,11 +13,15 @@ export class OrdersService {// OrdersService will be responsible for data storag
       ) {}
       // Interactions with data sources
       findAll() {
-        return this.orderRepository.find();
+        return this.orderRepository.find({
+          relations: ['user','invoice']
+        });
       }
     
       async findOne(id: string) {
-        const order = await this.orderRepository.findOne(id);
+        const order = await this.orderRepository.findOne(id, {
+          relations: ['user','invoice']
+        });
         if (!order) {
           throw new NotFoundException(`Pedido #${id} no encontrado`);// Exception when the order doesn't exist in data source
         }

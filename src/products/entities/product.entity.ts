@@ -1,8 +1,10 @@
 import { Order } from "src/orders/entities/order.entity";
+import { Supplier } from '../../suppliers/entities/supplier.entity';
 import { 
     Column,
     Entity,
     JoinColumn,
+    ManyToMany,
     ManyToOne,
     PrimaryGeneratedColumn,} from "typeorm";
 
@@ -28,5 +30,12 @@ export class Product{
     )
     @JoinColumn({ name: 'order_id'})
     order: Order[];
+    @ManyToMany(
+      type => Supplier,
+      supplier => supplier.product,
+    {onUpdate: 'CASCADE', onDelete: 'CASCADE'},
+    )
+    @JoinColumn({name:'supplier_id'})
+    supplier: Supplier[]
     
 }

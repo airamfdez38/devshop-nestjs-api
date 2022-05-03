@@ -1,5 +1,5 @@
 import { Order } from "src/orders/entities/order.entity";
-import { Column, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinColumn, JoinTable, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class Invoice{
@@ -13,12 +13,12 @@ export class Invoice{
     payment_method: string;
 
     // Entities relations
-
-    @OneToOne(() => Order,
-    (order: Order) => order.invoice,
+    @JoinTable()
+    @OneToOne(
+        type => Order,
+        order => order.invoice,
     {onUpdate: 'CASCADE', onDelete: 'CASCADE'},
     )
-    @JoinColumn({ name: 'order_id'})
     order: Order;
    
     
