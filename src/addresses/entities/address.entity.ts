@@ -1,5 +1,5 @@
 import { User } from "src/users/entities/user.entity";
-import { Column, Entity, JoinColumn, JoinTable, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinTable, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class Address{
@@ -23,8 +23,7 @@ export class Address{
     @ManyToOne(
         tupe => User,
         user => user.address,
-    
-    {onUpdate: 'CASCADE', onDelete: 'CASCADE'},
+        {onUpdate: 'CASCADE', onDelete: 'CASCADE'},
     )
     user: User;
     

@@ -14,11 +14,15 @@ export class ProductsService {// ProductsService will be responsible for data st
       // Interactions with data sources
       
       findAll() {
-        return this.productRepository.find();
+        return this.productRepository.find({
+          relations: ['order', 'supplier']
+        });
       }
     
       async findOne(id: string) {
-        const product = await this.productRepository.findOne(id);
+        const product = await this.productRepository.findOne(id, {
+          relations: ['order', 'supplier']
+        });
         if (!product) {
           throw new NotFoundException(`Producto #${id} no encontrado`);// Exception when the order doesn't exist in data source
         }

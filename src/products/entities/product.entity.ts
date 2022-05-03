@@ -4,7 +4,7 @@ import {
     Column,
     Entity,
     JoinColumn,
-    ManyToMany,
+    JoinTable,
     ManyToOne,
     PrimaryGeneratedColumn,} from "typeorm";
 
@@ -24,18 +24,19 @@ export class Product{
     category: string;
     
       // Entities relatiions
-    @ManyToOne(() => Order,
-    (order: Order) => order.product,
-    {onUpdate: 'CASCADE', onDelete: 'CASCADE'},
+    @JoinTable()
+    @ManyToOne(
+      type => Order,
+      order=> order.product,
+      {onUpdate: 'CASCADE', onDelete: 'CASCADE'},
     )
-    @JoinColumn({ name: 'order_id'})
     order: Order[];
-    @ManyToMany(
+
+    @ManyToOne(
       type => Supplier,
       supplier => supplier.product,
-    {onUpdate: 'CASCADE', onDelete: 'CASCADE'},
+      {onUpdate: 'CASCADE', onDelete: 'CASCADE'},
     )
-    @JoinColumn({name:'supplier_id'})
-    supplier: Supplier[]
+    supplier: Supplier
     
 }

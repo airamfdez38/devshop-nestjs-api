@@ -1,6 +1,5 @@
 
 import { Product } from "src/products/entities/product.entity";
-import { Supplier } from "src/suppliers/entities/supplier.entity";
 import { User } from "src/users/entities/user.entity";
 import { Column, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn, ManyToOne, OneToMany, JoinTable } from 'typeorm';
 import { Invoice } from '../../invoices/entities/invoice.entity';
@@ -41,7 +40,7 @@ export class Order{ //sql table === 'order'
    */
 
     @ManyToOne(
-        type => User, user => user.orders,
+        type => User, user => user.order,
         {onUpdate: 'CASCADE', onDelete: 'CASCADE'},
     )
     user: string;

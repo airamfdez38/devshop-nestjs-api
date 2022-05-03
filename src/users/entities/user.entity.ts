@@ -1,6 +1,6 @@
 
 import { Order } from "src/orders/entities/order.entity";
-import { Column, Entity, JoinColumn, JoinTable, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinTable, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { Address } from '../../addresses/entities/address.entity';
 
 @Entity()
@@ -36,7 +36,7 @@ export class User{
       order => order.user,
       {onUpdate: 'CASCADE', onDelete: 'CASCADE'},
     )
-    orders: Order[];
+    order: Order[];
 
     @OneToMany(
       type => Address,

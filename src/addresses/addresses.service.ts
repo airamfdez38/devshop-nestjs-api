@@ -14,11 +14,15 @@ export class AddressesService { // AddressesService will be responsible for data
       
       // Interactions with data sources
       findAll() {
-        return this.addressRepository.find();
+        return this.addressRepository.find({
+          relations: ['user']
+        });
       }
     
       async findOne(id: string) {
-        const address = await this.addressRepository.findOne(id);
+        const address = await this.addressRepository.findOne(id, {
+          relations: ['user']
+        });
         if (!address) {
           throw new NotFoundException(`Dirección #${id} no encontrada`); // Exception when the address doesn't exist in data source
         }

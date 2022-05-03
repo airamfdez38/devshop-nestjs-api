@@ -15,14 +15,14 @@ export class UsersService {// UsersService will be responsible for data storage 
 
   findAll() {
     return this.userRepository.find({
-      relations:['orders']
+      relations:['order', 'address']
     }
     );
   }
 
   async findOne(id: string) {
     const user = await this.userRepository.findOne(id, {
-      relations: ['orders'],
+      relations: ['order','address'],
     });
     if (!user) {
       throw new NotFoundException(`Usuario #${id} no encontrado`);// Exception when the user doesn't exist in data source

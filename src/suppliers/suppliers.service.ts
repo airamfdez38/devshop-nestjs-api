@@ -14,11 +14,16 @@ export class SuppliersService {// SuppliersService will be responsible for data 
       // Interactions with data sources
       
       findAll() {
-        return this.supplierRepository.find();
+        return this.supplierRepository.find({
+          relations:['product']
+        });
       }
     
       async findOne(id: string) {
-        const supplier = await this.supplierRepository.findOne(id);
+        const supplier = await this.supplierRepository.findOne(id,{
+          relations: ['product']
+        }
+          );
         if (!supplier) {
           throw new NotFoundException(`Proveedor #${id} no encontrado`);// Exception when the supplier doesn't exist in data source
         }

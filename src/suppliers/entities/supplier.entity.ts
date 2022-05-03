@@ -1,5 +1,6 @@
-import { Product } from "src/products/entities/product.entity";
-import { Column, Entity, JoinColumn, ManyToMany, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Order } from "src/orders/entities/order.entity";
+import { Column, Entity, JoinColumn, JoinTable, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Product } from '../../products/entities/product.entity';
 
 
 @Entity()
@@ -18,12 +19,12 @@ export class Supplier{
     phone: string;
 
     //Entities relations
-    @ManyToMany(
+    @JoinTable()
+    @OneToMany(
         type => Product,
         product => product.supplier,
     {onUpdate: 'CASCADE', onDelete: 'CASCADE'},
     )
-    @JoinColumn({ name: 'order_id'})
     product: Product[];
     
 }
