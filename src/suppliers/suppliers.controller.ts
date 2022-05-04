@@ -1,4 +1,5 @@
 import { Body, Controller, Delete, Get, Param, Patch, Post, Query } from '@nestjs/common';
+import { PaginationQueryDto } from 'src/common/dto/pagination-query.dto';
 import { CreateSupplierDto } from './dto/create-supplier.dto';
 import { UpdateSupplierDto } from './dto/update-supplier.dto';
 import { SuppliersService } from './suppliers.service';
@@ -13,9 +14,9 @@ export class SuppliersController {
     @Get()
     // Request that will be used to fetch all the results for this controller
 
-    findAll(@Query() paginationQuery){
+    findAll(@Query() paginationQuery:PaginationQueryDto){
         //const {limit, offset} = paginationQuery;
-        return this.supplierService.findAll();
+        return this.supplierService.findAll(paginationQuery);
     }
     @Get(':id')
      /* Request that returns a result by its id.

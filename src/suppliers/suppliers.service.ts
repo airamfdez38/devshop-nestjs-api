@@ -4,6 +4,7 @@ import { Repository } from 'typeorm';
 import { CreateSupplierDto } from './dto/create-supplier.dto';
 import { UpdateSupplierDto } from './dto/update-supplier.dto';
 import { Supplier } from './entities/supplier.entity';
+import { PaginationQueryDto } from '../common/dto/pagination-query.dto';
 
 @Injectable()
 export class SuppliersService {// SuppliersService will be responsible for data storage and retieval.
@@ -13,9 +14,12 @@ export class SuppliersService {// SuppliersService will be responsible for data 
       ) {}
       // Interactions with data sources
       
-      findAll() {
+      findAll(paginationQuery: PaginationQueryDto) {
+        const {limit, offset} =paginationQuery;
         return this.supplierRepository.find({
-          relations:['product']
+          relations:['product'],
+          skip: offset,
+          take: limit,
         });
       }
     

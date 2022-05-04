@@ -1,5 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { PaginationQueryDto } from 'src/common/dto/pagination-query.dto';
 import { Repository } from 'typeorm';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
@@ -12,10 +13,12 @@ export class ProductsService {// ProductsService will be responsible for data st
         private readonly productRepository: Repository<Product>,
       ) {}
       // Interactions with data sources
-      
-      findAll() {
+      findAll(paginationQuery: PaginationQueryDto) {
+        const {limit, offset} = paginationQuery;
         return this.productRepository.find({
-          relations: ['order', 'supplier']
+          relations: ['order', 'supplier'],
+          skip: offset,
+          take: limit,
         });
       }
     

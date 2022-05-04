@@ -2,6 +2,7 @@ import { Body, Controller, Delete, Get, Param, Patch, Post, Query } from '@nestj
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
 import { ProductsService } from './products.service';
+import { PaginationQueryDto } from '../common/dto/pagination-query.dto';
 
 @Controller('products')
 export class ProductsController {
@@ -13,9 +14,9 @@ export class ProductsController {
     @Get()
     // Request that will be used to fetch all the results for this controller
 
-    findAll(@Query() paginationQuery){
+    findAll(@Query() paginationQuery: PaginationQueryDto){
         //const {limit, offset} = paginationQuery;
-        return this.productService.findAll();
+        return this.productService.findAll(paginationQuery);
     }
     @Get(':id')
     /* Request that returns a result by its id.
