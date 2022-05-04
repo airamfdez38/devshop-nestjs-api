@@ -2,6 +2,7 @@ import { Body, Controller, Delete, Get, Param, Patch, Post, Query } from '@nestj
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
+import { PaginationQueryDto } from 'src/common/dto/pagination-query.dto';
 
 @Controller('users')
 export class UsersController {
@@ -13,9 +14,9 @@ export class UsersController {
     @Get()
     // Request that will be used to fetch all the results for this controller
 
-    findAll(@Query() paginationQuery){
+    findAll(@Query() paginationQuery:PaginationQueryDto){
         //const {limit, offset} = paginationQuery;
-        return this.userService.findAll();
+        return this.userService.findAll(paginationQuery);
     }
     @Get(':id')
      /* Request that returns a result by its id.

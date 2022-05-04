@@ -5,6 +5,7 @@ import { Repository } from 'typeorm';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from './entities/user.entity';
+import { PaginationQueryDto } from '../common/dto/pagination-query.dto';
 
 @Injectable()
 export class UsersService {// UsersService will be responsible for data storage and retieval.
@@ -13,9 +14,13 @@ export class UsersService {// UsersService will be responsible for data storage 
     private readonly userRepository: Repository<User>,
   ) {}
 
-  findAll() {
+  findAll(paginationQuery: PaginationQueryDto) {
+    const {limit, offset} =paginationQuery;
     return this.userRepository.find({
-      relations:['order', 'address']
+      relations:['order', 'address'],
+      skip: offset,
+      take: limit,
+
     }
     );
   }

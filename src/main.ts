@@ -10,7 +10,7 @@ async function bootstrap() {
       transform: true,
       forbidNonWhitelisted: true,
       transformOptions: {
-        enableImplicitConversion: true,
+        enableImplicitConversion: true,//With this option we no longer have to specify with types decorator 
       },
     }
   ));
