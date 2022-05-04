@@ -13,13 +13,13 @@ export class OrdersService {// OrdersService will be responsible for data storag
         private readonly orderRepository: Repository<Order>,
       ) {}
       // Interactions with data sources
-      findAll(paginationQuery: PaginationQueryDto)  {
+      findAll(paginationQuery: PaginationQueryDto)  {//Pagination helps us divide into consumable segment of information
         const {limit, offset} = paginationQuery;
 
         return this.orderRepository.find({
           relations: ['user','invoice','product'],
-          skip: offset,
-          take: limit,
+          skip: offset,// offset is the number of records we want to skip before selecting records.
+          take: limit,//Limit is the number of records we want to take after skipping is done.
         });
       }
     

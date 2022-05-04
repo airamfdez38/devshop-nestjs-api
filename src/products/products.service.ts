@@ -13,12 +13,12 @@ export class ProductsService {// ProductsService will be responsible for data st
         private readonly productRepository: Repository<Product>,
       ) {}
       // Interactions with data sources
-      findAll(paginationQuery: PaginationQueryDto) {
+      findAll(paginationQuery: PaginationQueryDto) {//Pagination helps us divide into consumable segment of information
         const {limit, offset} = paginationQuery;
         return this.productRepository.find({
           relations: ['order', 'supplier'],
-          skip: offset,
-          take: limit,
+          skip: offset,// offset is the number of records we want to skip before selecting records.
+          take: limit,//Limit is the number of records we want to take after skipping is done.
         });
       }
     

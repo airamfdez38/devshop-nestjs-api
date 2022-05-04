@@ -1,5 +1,4 @@
-import { Order } from "src/orders/entities/order.entity";
-import { Column, Entity, JoinColumn, JoinTable, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinTable, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { Product } from '../../products/entities/product.entity';
 
 
@@ -17,6 +16,8 @@ export class Supplier{
     email: string;
     @Column()
     phone: string;
+    @Column({default: 0})
+    recommendations: number;
 
     //Entities relations
     @JoinTable()
