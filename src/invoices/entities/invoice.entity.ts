@@ -1,5 +1,5 @@
 import { Order } from "src/orders/entities/order.entity";
-import { Column, Entity, JoinColumn, JoinTable, OneToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinTable, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class Invoice{
@@ -11,6 +11,8 @@ export class Invoice{
     amount: number;
     @Column()
     payment_method: string;
+    @Column({default: 0})
+    recommendations: number;
 
     // Entities relations
     @JoinTable()

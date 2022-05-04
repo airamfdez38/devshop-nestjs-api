@@ -17,6 +17,8 @@ export class Address{
     city: string;
     @Column()
     country: string;
+    @Column({default: 0})
+    recommendations: number;
 
     // Entities relations
     @JoinTable()
