@@ -14,6 +14,8 @@ export class Order{ //sql table === 'order'
     amount: number;
     @Column()
     total: number;
+    @Column({default: 0})
+    recommendations: number;
     
     // Entities relatiions
     @JoinTable()
