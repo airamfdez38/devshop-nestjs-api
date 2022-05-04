@@ -3,7 +3,6 @@ import { Supplier } from '../../suppliers/entities/supplier.entity';
 import { 
     Column,
     Entity,
-    JoinColumn,
     JoinTable,
     ManyToOne,
     PrimaryGeneratedColumn,} from "typeorm";
@@ -22,6 +21,8 @@ export class Product{
     price: number;
     @Column()
     category: string;
+    @Column({default: 0})
+    recommendations: number;
     
       // Entities relatiions
     @JoinTable()

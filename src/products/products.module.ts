@@ -5,9 +5,10 @@ import { Product } from './entities/product.entity';
 import { ProductsController } from './products.controller';
 import { ProductsService } from './products.service';
 import { Supplier } from '../suppliers/entities/supplier.entity';
+import { Event } from '../events/entities/event.entity';
 
 @Module({//Used to organize application components.
-    imports:[TypeOrmModule.forFeature([Product, Order, Supplier])],
+    imports:[TypeOrmModule.forFeature([Product, Order, Supplier, Event])],
     controllers:[ProductsController],
     providers: [ProductsService]
 })
