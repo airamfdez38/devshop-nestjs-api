@@ -1,5 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { PaginationQueryDto } from 'src/common/dto/pagination-query.dto';
 import { Repository } from 'typeorm';
 import { CreateInvoiceDto } from './dto/create-invoice.dto';
 import { UpdateInvoiceDto } from './dto/update-invoice.dto';
@@ -13,9 +14,13 @@ export class InvoicesService {// InvoicesService will be responsible for data st
       ) {}
       // Interactions with data sources
       
-      findAll() {
+      findAll(paginationQuery: PaginationQueryDto) {
+        const {limit, offset} =paginationQuery;
+
         return this.invoiceRepository.find({
-          relations: ['order']
+          relations: ['order'],
+          skip: offset,
+          take: limit,
         }
         );
       }

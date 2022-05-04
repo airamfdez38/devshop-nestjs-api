@@ -1,4 +1,5 @@
 import { Body, Controller, Delete, Get, Param, Patch, Post, Query } from '@nestjs/common';
+import { PaginationQueryDto } from 'src/common/dto/pagination-query.dto';
 import { CreateInvoiceDto } from './dto/create-invoice.dto';
 import { UpdateInvoiceDto } from './dto/update-invoice.dto';
 import { InvoicesService } from './invoices.service';
@@ -11,9 +12,9 @@ export class InvoicesController {
      //GET HTTP handler using a Nest decorator
     @Get()
     // Request that will be used to fetch all the results for this controller
-    findAll(@Query() paginationQuery){
+    findAll(@Query() paginationQuery:PaginationQueryDto){
         //const {limit, offset} = paginationQuery;
-        return this.invoiceService.findAll();
+        return this.invoiceService.findAll(paginationQuery);
     }
     @Get(':id')
      /* Request that returns a result by its id.

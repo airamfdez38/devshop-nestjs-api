@@ -4,6 +4,7 @@ import { Repository } from 'typeorm';
 import { CreateAddressDto } from './dto/create-address.dto';
 import { UpdateAddressDto } from './dto/update-address.dto';
 import { Address } from './entities/address.entity';
+import { PaginationQueryDto } from '../common/dto/pagination-query.dto';
 
 @Injectable()
 export class AddressesService { // AddressesService will be responsible for data storage and retieval.
@@ -13,9 +14,12 @@ export class AddressesService { // AddressesService will be responsible for data
       ) {}
       
       // Interactions with data sources
-      findAll() {
+      findAll(paginationQuery: PaginationQueryDto) {
+        const {limit, offset} = paginationQuery;
         return this.addressRepository.find({
-          relations: ['user']
+          relations: ['user'],
+          skip: offset,
+          take: limit,
         });
       }
     

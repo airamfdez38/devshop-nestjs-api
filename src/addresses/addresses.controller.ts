@@ -13,7 +13,7 @@ export class AddressesController {
     // Request that will be used to fetch all the results for this controller
     findAll(@Query() paginationQuery){
         //const {limit, offset} = paginationQuery;
-        return this.addressService.findAll();
+        return this.addressService.findAll(paginationQuery);
     }
     @Get(':id')
     /* Request that returns a result by its id.
