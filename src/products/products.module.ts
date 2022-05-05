@@ -10,6 +10,11 @@ import { Event } from '../events/entities/event.entity';
 @Module({//Used to organize application components.
     imports:[TypeOrmModule.forFeature([Product, Order, Supplier, Event])],
     controllers:[ProductsController],
-    providers: [ProductsService]
+    providers: [
+        {
+            provide: ProductsService,
+            useClass: ProductsService,
+        }
+    ], exports: [ProductsService],
 })
 export class ProductsModule {}

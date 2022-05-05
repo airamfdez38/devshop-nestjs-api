@@ -9,6 +9,11 @@ import { Event } from 'src/events/entities/event.entity';
 @Module({//Used to organize application components.
     imports:[TypeOrmModule.forFeature([Supplier, Product, Event])],
     controllers:[SuppliersController],
-    providers: [SuppliersService]
+    providers: [
+        {
+            provide: SuppliersService,
+            useClass: SuppliersService,
+        }
+    ]
 })
 export class SuppliersModule {}
