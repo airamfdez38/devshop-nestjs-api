@@ -6,13 +6,14 @@ import { InvoicesService } from './invoices.service';
 import { Order } from '../orders/entities/order.entity';
 import { Event } from '../events/entities/event.entity';
 
+class MockInvoicesService{}
 @Module({ //Used to organize application components.
     imports:[TypeOrmModule.forFeature([Invoice, Order, Event])],
     controllers:[InvoicesController],
     providers: [
         {
             provide: InvoicesService,
-            useClass: InvoicesService,
+            useValue: new MockInvoicesService(),
         }
     ],
     exports: [InvoicesService],

@@ -6,14 +6,16 @@ import { SuppliersService } from './suppliers.service';
 import { Product } from '../products/entities/product.entity';
 import { Event } from 'src/events/entities/event.entity';
 
+class MockSuppliersService{}
 @Module({//Used to organize application components.
     imports:[TypeOrmModule.forFeature([Supplier, Product, Event])],
     controllers:[SuppliersController],
     providers: [
         {
             provide: SuppliersService,
-            useClass: SuppliersService,
+            useValue: new MockSuppliersService(),
         }
-    ]
+    ],
+    exports: [SuppliersService],
 })
 export class SuppliersModule {}

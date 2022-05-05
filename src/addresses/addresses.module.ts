@@ -6,13 +6,14 @@ import { AddressesService } from './addresses.service';
 import { User } from '../users/entities/user.entity';
 import { Event } from 'src/events/entities/event.entity';
 
+class MockAddressesService{}
 @Module({ //Used to organize application components.
     imports:[TypeOrmModule.forFeature([Address, User, Event])],
     controllers:[AddressesController],
     providers: [
         {
             provide: AddressesService,
-            useClass: AddressesService,
+            useValue: new MockAddressesService(),
         }
     ],
     exports: [AddressesService],
