@@ -12,6 +12,7 @@ import { UserRatingModule } from './user-rating/user-rating.module';
 import { ProductRatingModule } from './product-rating/product-rating.module';
 import { OrderRatingModule } from './order-rating/order-rating.module';
 import { InvoiceRatingModule } from './invoice-rating/invoice-rating.module';
+import { AddressRatingModule } from './address-rating/address-rating.module';
 
 @Module({
   imports: [UsersModule, TypeOrmModule.forRoot({
@@ -23,7 +24,7 @@ import { InvoiceRatingModule } from './invoice-rating/invoice-rating.module';
     database: 'postgres', 
     autoLoadEntities: true, 
     synchronize: true, 
-  }), OrdersModule, ProductsModule, SuppliersModule, InvoicesModule, AddressesModule, UserRatingModule, ProductRatingModule, OrderRatingModule, InvoiceRatingModule],
+  }), OrdersModule, ProductsModule, SuppliersModule, InvoicesModule, AddressesModule, UserRatingModule, ProductRatingModule, OrderRatingModule, InvoiceRatingModule, AddressRatingModule],
   controllers: [AppController],
   providers: [AppService],
 })

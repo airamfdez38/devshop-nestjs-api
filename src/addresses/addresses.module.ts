@@ -15,6 +15,7 @@ import { Event } from 'src/events/entities/event.entity';
             useClass: AddressesService,
         }
     ],
+    exports: [AddressesService],
     
 })
 export class AddressesModule {}
