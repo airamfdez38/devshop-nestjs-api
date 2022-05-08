@@ -21,9 +21,8 @@ export class Address{
     recommendations: number;
 
     // Entities relations
-    @JoinTable()
     @ManyToOne(
-        tupe => User,
+        type => User,
         user => user.address,
         {onUpdate: 'CASCADE', onDelete: 'CASCADE'},
     )

@@ -3,19 +3,12 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { Supplier } from './entities/supplier.entity';
 import { SuppliersController } from './suppliers.controller';
 import { SuppliersService } from './suppliers.service';
-import { Product } from '../products/entities/product.entity';
 import { Event } from 'src/events/entities/event.entity';
 
-class MockSuppliersService{}
 @Module({//Used to organize application components.
-    imports:[TypeOrmModule.forFeature([Supplier, Product, Event])],
+    imports:[TypeOrmModule.forFeature([Supplier, Event])],
     controllers:[SuppliersController],
-    providers: [
-        {
-            provide: SuppliersService,
-            useValue: new MockSuppliersService(),
-        }
-    ],
+    providers: [SuppliersService],
     exports: [SuppliersService],
 })
 export class SuppliersModule {}

@@ -3,19 +3,12 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { AddressesController } from './addresses.controller';
 import { Address } from './entities/address.entity';
 import { AddressesService } from './addresses.service';
-import { User } from '../users/entities/user.entity';
 import { Event } from 'src/events/entities/event.entity';
 
-class MockAddressesService{}
 @Module({ //Used to organize application components.
-    imports:[TypeOrmModule.forFeature([Address, User, Event])],
+    imports:[TypeOrmModule.forFeature([Address, Event])],
     controllers:[AddressesController],
-    providers: [
-        {
-            provide: AddressesService,
-            useValue: new MockAddressesService(),
-        }
-    ],
+    providers: [AddressesService],
     exports: [AddressesService],
     
 })

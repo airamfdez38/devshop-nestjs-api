@@ -1,6 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Connection, Repository } from 'typeorm';
+import { Repository } from 'typeorm';
 import { CreateAddressDto } from './dto/create-address.dto';
 import { UpdateAddressDto } from './dto/update-address.dto';
 import { Address } from './entities/address.entity';
@@ -11,14 +11,13 @@ export class AddressesService { // AddressesService will be responsible for data
     constructor(
       @InjectRepository(Address)
       private readonly addressRepository: Repository<Address>,
-      private readonly connection: Connection
     ) {}
     
     // Interactions with data sources
     findAll(paginationQuery: PaginationQueryDto) {//Pagination helps us divide into consumable segment of information
       const {limit, offset} = paginationQuery;
       return this.addressRepository.find({
-        relations: ['address'],
+        relations: ['user'],
         skip: offset,// offset is the number of records we want to skip before selecting records.
         take: limit,//Limit is the number of records we want to take after skipping is done.
       });
@@ -54,7 +53,7 @@ export class AddressesService { // AddressesService will be responsible for data
       const address = await this.findOne(id);
       return this.addressRepository.remove(address);
     }
-    async recommendAddress(address: Address) {
+   /* async recommendAddress(address: Address) {
       const queryRunner = this.connection.createQueryRunner();
       
       await queryRunner.connect();
@@ -76,5 +75,5 @@ export class AddressesService { // AddressesService will be responsible for data
       } finally {
         await queryRunner.release();
       }
-    }
+    }*/
 }

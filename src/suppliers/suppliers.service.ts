@@ -1,6 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Connection,Repository } from 'typeorm';
+import { Repository } from 'typeorm';
 import { CreateSupplierDto } from './dto/create-supplier.dto';
 import { UpdateSupplierDto } from './dto/update-supplier.dto';
 import { Supplier } from './entities/supplier.entity';
@@ -12,7 +12,6 @@ export class SuppliersService {// SuppliersService will be responsible for data 
     constructor(
         @InjectRepository(Supplier)
         private readonly supplierRepository: Repository<Supplier>,
-        private readonly connection: Connection,
       ) {}
       // Interactions with data sources
       
@@ -56,7 +55,7 @@ export class SuppliersService {// SuppliersService will be responsible for data 
         const supplier = await this.findOne(id);
         return this.supplierRepository.remove(supplier);
       }
-      async recommendSupplier(supplier: Supplier) {
+     /* async recommendSupplier(supplier: Supplier) {
         const queryRunner = this.connection.createQueryRunner();
         
         await queryRunner.connect();
@@ -80,4 +79,5 @@ export class SuppliersService {// SuppliersService will be responsible for data 
         }
     
       }
+      */
 }

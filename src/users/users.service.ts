@@ -13,7 +13,6 @@ export class UsersService {// UsersService will be responsible for data storage 
   constructor(
     @InjectRepository(User)
     private readonly userRepository: Repository<User>,
-    private readonly connection: Connection,
   ) {}
 
   findAll(paginationQuery: PaginationQueryDto) {//Pagination helps us divide into consumable segment of information
@@ -57,7 +56,7 @@ export class UsersService {// UsersService will be responsible for data storage 
     const user = await this.findOne(id);
     return this.userRepository.remove(user);
   }
-  async recommendUser(user: User) {
+ /* async recommendUser(user: User) {
     const queryRunner = this.connection.createQueryRunner();
     
     await queryRunner.connect();
@@ -80,5 +79,6 @@ export class UsersService {// UsersService will be responsible for data storage 
       await queryRunner.release();
     }
 
-  }
+  }*/
+
 }

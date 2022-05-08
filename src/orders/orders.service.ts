@@ -19,7 +19,7 @@ export class OrdersService {// OrdersService will be responsible for data storag
       const {limit, offset} = paginationQuery;
 
       return this.orderRepository.find({
-        relations: ['order','invoice','product'],
+        relations: ['invoice','product'],
         skip: offset,// offset is the number of records we want to skip before selecting records.
         take: limit,//Limit is the number of records we want to take after skipping is done.
       });

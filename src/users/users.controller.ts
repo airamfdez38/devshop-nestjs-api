@@ -11,9 +11,7 @@ export class UsersController {
     }
     //GET HTTP handler using a Nest decorator
 
-    @Get()
-    // Request that will be used to fetch all the results for this controller
-
+    @Get() // Request that will be used to fetch all the results for this controller
     findAll(@Query() paginationQuery:PaginationQueryDto){
         //const {limit, offset} = paginationQuery;
         return this.userService.findAll(paginationQuery);

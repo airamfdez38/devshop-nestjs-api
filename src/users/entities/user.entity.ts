@@ -3,7 +3,7 @@ import { Order } from "src/orders/entities/order.entity";
 import { Column, Entity, JoinTable, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { Address } from '../../addresses/entities/address.entity';
 
-@Entity()
+@Entity('users')
 export class User{
     @PrimaryGeneratedColumn()//Primary key
     id: number;
@@ -32,7 +32,6 @@ export class User{
     )
     @JoinColumn({ name: 'order_id'})
     order: Order[];*/
-    @JoinTable()
     @OneToMany(
       type=> Order,
       order => order.user,
