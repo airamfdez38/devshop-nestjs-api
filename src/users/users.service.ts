@@ -13,12 +13,12 @@ export class UsersService {// UsersService will be responsible for data storage 
   constructor(
     @InjectRepository(User)
     private readonly userRepository: Repository<User>,
-  ) {}
+  ) { }
 
   findAll(paginationQuery: PaginationQueryDto) {//Pagination helps us divide into consumable segment of information
-    const {limit, offset} =paginationQuery;
+    const { limit, offset } = paginationQuery;
     return this.userRepository.find({
-      relations:['order', 'address'],
+      relations: ['order', 'address'],
       skip: offset,// offset is the number of records we want to skip before selecting records.
       take: limit,//Limit is the number of records we want to take after skipping is done.
 
@@ -28,12 +28,18 @@ export class UsersService {// UsersService will be responsible for data storage 
 
   async findOne(id: string) {
     const user = await this.userRepository.findOne(id, {
-      relations: ['order','address'],
+      relations: ['order', 'address'],
     });
     if (!user) {
       throw new NotFoundException(`Usuario #${id} no encontrado`);// Exception when the user doesn't exist in data source
     }
     return user;
+  }
+
+  async findByEmail(email: string): Promise<User> {
+    return this.userRepository.findOne({
+      where: { email }
+    })
   }
 
   create(createUserDto: CreateUserDto) {
@@ -56,29 +62,29 @@ export class UsersService {// UsersService will be responsible for data storage 
     const user = await this.findOne(id);
     return this.userRepository.remove(user);
   }
- /* async recommendUser(user: User) {
-    const queryRunner = this.connection.createQueryRunner();
-    
-    await queryRunner.connect();
-    await queryRunner.startTransaction(); 
-    try {
-      user.recommendations++;
-      
-      const recommendEvent = new Event();
-      recommendEvent.name = 'recommend_user';
-      recommendEvent.type = 'user';
-      recommendEvent.payload = { userId: user.id };
-    
-      await queryRunner.manager.save(user); 
-      await queryRunner.manager.save(recommendEvent);
-      
-      await queryRunner.commitTransaction();
-    } catch (err) {
-      await queryRunner.rollbackTransaction();
-    } finally {
-      await queryRunner.release();
-    }
-
-  }*/
+  /* async recommendUser(user: User) {
+     const queryRunner = this.connection.createQueryRunner();
+     
+     await queryRunner.connect();
+     await queryRunner.startTransaction(); 
+     try {
+       user.recommendations++;
+       
+       const recommendEvent = new Event();
+       recommendEvent.name = 'recommend_user';
+       recommendEvent.type = 'user';
+       recommendEvent.payload = { userId: user.id };
+     
+       await queryRunner.manager.save(user); 
+       await queryRunner.manager.save(recommendEvent);
+       
+       await queryRunner.commitTransaction();
+     } catch (err) {
+       await queryRunner.rollbackTransaction();
+     } finally {
+       await queryRunner.release();
+     }
+ 
+   }*/
 
 }
