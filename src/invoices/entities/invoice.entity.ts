@@ -4,7 +4,7 @@ import { Column, Entity, JoinTable, OneToOne, PrimaryGeneratedColumn } from "typ
 @Entity('invoices')
 export class Invoice{
     @PrimaryGeneratedColumn('uuid')
-    id: string;
+    uuid: string;
     @Column()
     date: string;
     @Column()

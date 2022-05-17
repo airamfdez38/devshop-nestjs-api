@@ -19,8 +19,6 @@ export class User{
     password: string;
     @Column()
     phone: string;
-    @Column({default: 0})
-    recommendations: number;
     @Column({ default: true })
     isActive: boolean;
 

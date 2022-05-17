@@ -7,15 +7,13 @@ import { Invoice } from '../../invoices/entities/invoice.entity';
 @Entity('orders')
 export class Order{ //sql table === 'order'
     @PrimaryGeneratedColumn('uuid')//Primary key
-    id: string; 
+    uuid: string; 
     @Column()
     date: string;
     @Column()
     amount: number;
     @Column()
     total: number;
-    @Column({default: 0})
-    recommendations: number;
     
     // Entities relatiions
     @JoinTable()

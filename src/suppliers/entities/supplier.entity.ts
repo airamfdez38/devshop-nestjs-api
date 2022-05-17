@@ -5,7 +5,7 @@ import { Product } from '../../products/entities/product.entity';
 @Entity()
 export class Supplier{
     @PrimaryGeneratedColumn('uuid')//Primary key
-    id: string;
+    uuid: string;
     @Column()
     name: string;
     @Column()
@@ -16,8 +16,6 @@ export class Supplier{
     email: string;
     @Column()
     phone: string;
-    @Column({default: 0})
-    recommendations: number;
 
     //Entities relations
     @JoinTable()
