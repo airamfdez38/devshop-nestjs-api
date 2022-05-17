@@ -6,7 +6,7 @@ import { Address } from '../../addresses/entities/address.entity';
 @Entity('users')
 export class User{
     @PrimaryGeneratedColumn('uuid')//Primary key
-    id: string;
+    uuid: string;
     @Column()
     name: string;
     @Column()

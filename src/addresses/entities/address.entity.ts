@@ -4,7 +4,7 @@ import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 @Entity('addresses')
 export class Address{
     @PrimaryGeneratedColumn('uuid') //Primary key
-    id: string;
+    uuid: string;
     @Column()
     via: string;
     @Column()

@@ -1,17 +1,14 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { PaginationQueryDto } from 'src/common/dto/pagination-query.dto';
-import { Connection,Repository } from 'typeorm';
+import { Repository } from 'typeorm';
 import { CreateProductDto } from './dto/create-product.dto';
-import { UpdateProductDto } from './dto/update-product.dto';
 import { Product } from './entities/product.entity';
-import { Event } from 'src/events/entities/event.entity';
 @Injectable()
 export class ProductsService {// ProductsService will be responsible for data storage and retieval.
   constructor(
       @InjectRepository(Product)
       private readonly productRepository: Repository<Product>,
-      private readonly connection: Connection,
     ) {}
     // Interactions with data sources
     findAll(paginationQuery: PaginationQueryDto) {//Pagination helps us divide into consumable segment of information
@@ -38,22 +35,16 @@ export class ProductsService {// ProductsService will be responsible for data st
       return this.productRepository.save(product);
     }
   
-    async update(id: string, updateProductDto: UpdateProductDto) {
-      const product = await this.productRepository.preload({
-        id: +id,
-        ...updateProductDto,
-      });
-      if (!product) {
-        throw new NotFoundException(`Producto #${id} no encontrado`);// Preload updates an existing entity. If not exists throws an exception
-      }
-      return this.productRepository.save(product);
+    async update( updateProductDto: CreateProductDto) {
+     
+      return this.productRepository.save(updateProductDto);
     }
   
     async remove(id: string) {
       const product = await this.findOne(id);
       return this.productRepository.remove(product);
     }
-    async recommendProduct(product: Product) {
+   /* async recommendProduct(product: Product) {
       const queryRunner = this.connection.createQueryRunner();
       
       await queryRunner.connect();
@@ -75,5 +66,5 @@ export class ProductsService {// ProductsService will be responsible for data st
       } finally {
         await queryRunner.release();
       }
-    }   
+    }  */ 
 }

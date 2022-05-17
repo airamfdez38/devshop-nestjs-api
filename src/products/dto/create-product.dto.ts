@@ -3,6 +3,7 @@
 import { IsNumber, IsString } from "class-validator";
 
 export class CreateProductDto {//All properties are read-only to maintain immutability
+    uuid?: string;
     @IsString()
     readonly name: string;
     @IsString()

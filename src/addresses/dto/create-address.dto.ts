@@ -2,7 +2,7 @@
 import { IsString } from "class-validator";
 
 export class CreateAddressDto {//All properties are read-only to maintain immutability
-    @IsString()
+    
     uuid?: string;
     @IsString()
     readonly via: string;

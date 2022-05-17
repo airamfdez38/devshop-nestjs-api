@@ -9,8 +9,8 @@ import {
 
 @Entity() //  sql table === 'product'
 export class Product{
-    @PrimaryGeneratedColumn()//Primary key
-    id: number;
+    @PrimaryGeneratedColumn('uuid')//Primary key
+    uuid: string;
     @Column()
     name: string;
     @Column()

@@ -5,7 +5,7 @@ import { Repository } from 'typeorm';
 import { CreateUserDto } from './dto/create-user.dto';
 import { User } from './entities/user.entity';
 import { PaginationQueryDto } from '../common/dto/pagination-query.dto';
-import * as cripto from 'bcrypt';
+import * as cripto from 'crypto';
 
 @Injectable()
 export class UsersService {// UsersService will be responsible for data storage and retieval.
