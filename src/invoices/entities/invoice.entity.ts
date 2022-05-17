@@ -1,10 +1,10 @@
 import { Order } from "src/orders/entities/order.entity";
 import { Column, Entity, JoinTable, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 
-@Entity()
+@Entity('invoices')
 export class Invoice{
-    @PrimaryGeneratedColumn()
-    id: number;
+    @PrimaryGeneratedColumn('uuid')
+    id: string;
     @Column()
     date: string;
     @Column()

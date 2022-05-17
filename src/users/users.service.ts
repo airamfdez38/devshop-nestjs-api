@@ -1,12 +1,11 @@
 
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Connection, Repository } from 'typeorm';
+import { Repository } from 'typeorm';
 import { CreateUserDto } from './dto/create-user.dto';
-import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from './entities/user.entity';
 import { PaginationQueryDto } from '../common/dto/pagination-query.dto';
-import { Event } from '../events/entities/event.entity';
+import * as cripto from 'bcrypt';
 
 @Injectable()
 export class UsersService {// UsersService will be responsible for data storage and retieval.
@@ -44,18 +43,13 @@ export class UsersService {// UsersService will be responsible for data storage 
 
   create(createUserDto: CreateUserDto) {
     const user = this.userRepository.create(createUserDto);
+    user.password = cripto.createHmac('sha256', user.password).digest('hex')
     return this.userRepository.save(user);
   }
 
-  async update(id: string, updateUserDto: UpdateUserDto) {
-    const user = await this.userRepository.preload({
-      id: +id,
-      ...updateUserDto,
-    });
-    if (!user) {
-      throw new NotFoundException(`Usuario #${id} no encontrado`);// Preload updates an existing entity. If not exists throws an exception
-    }
-    return this.userRepository.save(user);
+  async update( updateUserDto: CreateUserDto) {
+    
+    return this.userRepository.save(updateUserDto);
   }
 
   async remove(id: string) {

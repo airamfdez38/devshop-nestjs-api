@@ -1,18 +1,15 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { PaginationQueryDto } from 'src/common/dto/pagination-query.dto';
-import { Repository, Connection } from 'typeorm';
+import { Repository } from 'typeorm';
 import { CreateOrderDto } from './dto/create-order.dto';
-import { UpdateOrderDto } from './dto/update-order.dto';
 import { Order } from './entities/order.entity';
-import { Event } from 'src/events/entities/event.entity';
 
 @Injectable()
 export class OrdersService {// OrdersService will be responsible for data storage and retieval.
     constructor(
       @InjectRepository(Order)
       private readonly orderRepository: Repository<Order>,
-      private readonly connection:Connection,
     ) {}
     // Interactions with data sources
     findAll(paginationQuery: PaginationQueryDto)  {//Pagination helps us divide into consumable segment of information
@@ -40,22 +37,16 @@ export class OrdersService {// OrdersService will be responsible for data storag
       return this.orderRepository.save(order);
     }
   
-    async update(id: string, updateOrderDto: UpdateOrderDto) {
-      const order = await this.orderRepository.preload({ // Preload updates an existing entity. If not exists throws an exception
-        id: +id,
-        ...updateOrderDto,
-      });
-      if (!order) {
-        throw new NotFoundException(`Pedido #${id} no encontrado`);
-      }
-      return this.orderRepository.save(order);
+    async update( updateOrderDto: CreateOrderDto) {
+      
+      return this.orderRepository.save(updateOrderDto);
     }
   
     async remove(id: string) {
       const order = await this.findOne(id);
       return this.orderRepository.remove(order);
     }
-    async recommendOrder(order: Order) {
+    /*async recommendOrder(order: Order) {
       const queryRunner = this.connection.createQueryRunner();
       
       await queryRunner.connect();
@@ -78,4 +69,5 @@ export class OrdersService {// OrdersService will be responsible for data storag
         await queryRunner.release();
       }
     }
+    */
 }

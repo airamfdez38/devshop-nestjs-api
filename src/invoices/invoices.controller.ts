@@ -5,7 +5,9 @@ import { PaginationQueryDto } from 'src/common/dto/pagination-query.dto';
 import { CreateInvoiceDto } from './dto/create-invoice.dto';
 import { UpdateInvoiceDto } from './dto/update-invoice.dto';
 import { InvoicesService } from './invoices.service';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Invoices')
 @Controller('invoices')
 export class InvoicesController {
     constructor(private readonly invoiceService: InvoicesService, private authService: AuthService){
@@ -32,11 +34,11 @@ export class InvoicesController {
         return this.invoiceService.create(createInvoiceDto);
     }
     // Method to modify datas partially
-    @Patch(':id')
+    @Patch()
     /* Needs of Param decorator that receives as parameter the product's id
        and the Body parameter that is going to be the request body */
-    update(@Param('id') id:string, @Body() updatenvoiceDto: UpdateInvoiceDto){
-        return this.invoiceService.update(id, updatenvoiceDto);
+    update( @Body() updateInvoiceDto: CreateInvoiceDto){
+        return this.invoiceService.update( updateInvoiceDto);
     }
     // Method to remove a product by its id
     @Delete(':id')

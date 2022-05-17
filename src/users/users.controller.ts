@@ -1,9 +1,10 @@
 import { Body, Controller, Delete, Get, Param, Patch, Post, Query } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
-import { UpdateUserDto } from './dto/update-user.dto';
 import { PaginationQueryDto } from 'src/common/dto/pagination-query.dto';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Users')
 @Controller('users')
 export class UsersController {
     constructor(private readonly userService: UsersService){
@@ -32,11 +33,11 @@ export class UsersController {
     }
     // Method to modify datas partially
 
-    @Patch(':id')
+    @Patch()
     /* Needs of Param decorator that receives as parameter the product's id
     and the Body parameter that is going to be the request body */
-    update(@Param('id') id:string, @Body() updateUserDto: UpdateUserDto){
-        return this.userService.update(id, updateUserDto);
+    update( @Body() updateUserDto: CreateUserDto){
+        return this.userService.update( updateUserDto);
     }
     // Method to remove a supplier by its id
     @Delete(':id')

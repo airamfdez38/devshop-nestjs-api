@@ -6,7 +6,9 @@ import { CreateOrderDto } from './dto/create-order.dto';
 import { UpdateOrderDto } from './dto/update-order.dto';
 import { OrdersService } from './orders.service';
 import { JwtAuthGuard } from './../auth/jwt-auth.guard';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Orders')
 @Controller('orders')
 export class OrdersController {
     constructor(private readonly orderService: OrdersService, private authService: AuthService){
@@ -36,11 +38,11 @@ export class OrdersController {
     }
     // Method to modify datas partially
 
-    @Patch(':id')
+    @Patch()
     /* Needs of Param decorator that receives as parameter the product's id
        and the Body parameter that is going to be the request body */
-    update(@Param('id') id:string, @Body() updateOrderDto: UpdateOrderDto){
-        return this.orderService.update(id, updateOrderDto);
+    update(@Body() updateOrderDto: CreateOrderDto){
+        return this.orderService.update(updateOrderDto);
     }
     // Method to remove a product by its id
 

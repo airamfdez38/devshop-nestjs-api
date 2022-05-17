@@ -5,6 +5,8 @@ import { IsString } from "class-validator";
 
 export class CreateUserDto {//All properties are read-only to maintain immutability
     @IsString()
+    uuid?: string;
+    @IsString()
     readonly name: string;
     @IsString()
     readonly surname: string;

@@ -1,8 +1,10 @@
 import { Body, Controller, Delete, Get, Param, Patch, Post, Query } from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
 import { AddressesService } from './addresses.service';
 import { CreateAddressDto } from './dto/create-address.dto';
 import { UpdateAddressDto } from './dto/update-address.dto';
 
+@ApiTags('Addresses')
 @Controller('addresses')
 export class AddressesController {
     constructor(private readonly addressService: AddressesService){
@@ -29,11 +31,11 @@ export class AddressesController {
         return this.addressService.create(createAddressDto);
     }
     // Method to modify datas partially
-    @Patch(':id')
+    @Patch()
     /* Needs of Param decorator that receives as parameter the product's id
        and the Body parameter that is going to be the request body */
-    update(@Param('id') id:string, @Body() updateAddressDto: UpdateAddressDto){
-        return this.addressService.update(id, updateAddressDto);
+    update(@Body() updateAddressDto: CreateAddressDto){
+        return this.addressService.update( updateAddressDto);
     }
     // Method to remove a product by its id
     @Delete(':id')

@@ -1,10 +1,10 @@
 import { User } from "src/users/entities/user.entity";
-import { Column, Entity, JoinTable, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 
-@Entity()
+@Entity('addresses')
 export class Address{
-    @PrimaryGeneratedColumn() //Primary key
-    id: number;
+    @PrimaryGeneratedColumn('uuid') //Primary key
+    id: string;
     @Column()
     via: string;
     @Column()

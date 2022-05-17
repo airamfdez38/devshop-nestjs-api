@@ -4,8 +4,8 @@ import { Product } from '../../products/entities/product.entity';
 
 @Entity()
 export class Supplier{
-    @PrimaryGeneratedColumn()//Primary key
-    id: number;
+    @PrimaryGeneratedColumn('uuid')//Primary key
+    id: string;
     @Column()
     name: string;
     @Column()

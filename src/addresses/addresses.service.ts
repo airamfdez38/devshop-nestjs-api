@@ -38,15 +38,9 @@ export class AddressesService { // AddressesService will be responsible for data
       return this.addressRepository.save(address);
     }
   
-    async update(id: string, updateAddressDto: UpdateAddressDto) {
-      const address = await this.addressRepository.preload({// Preload updates an existing entity. If not exists throws an exception
-        id: +id,
-        ...updateAddressDto,
-      });
-      if (!address) {
-        throw new NotFoundException(`Dirección #${id} no encontrada`);
-      }
-      return this.addressRepository.save(address);
+    async update(updateAddressDto: CreateAddressDto) {
+      
+      return this.addressRepository.save(updateAddressDto);
     }
   
     async remove(id: string) {

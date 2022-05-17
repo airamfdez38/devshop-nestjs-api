@@ -4,10 +4,10 @@ import { User } from "src/users/entities/user.entity";
 import { Column, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn, ManyToOne, OneToMany, JoinTable } from 'typeorm';
 import { Invoice } from '../../invoices/entities/invoice.entity';
 
-@Entity()
+@Entity('orders')
 export class Order{ //sql table === 'order'
-    @PrimaryGeneratedColumn()//Primary key
-    id: number; 
+    @PrimaryGeneratedColumn('uuid')//Primary key
+    id: string; 
     @Column()
     date: string;
     @Column()
@@ -32,15 +32,7 @@ export class Order{ //sql table === 'order'
     )
     @JoinColumn({ name: 'invoice_id'})
     invoice: Invoice;
-    /*
-    @ManyToOne(() => User,
-    (user: User) => user.order,
-    {onUpdate: 'CASCADE', onDelete: 'CASCADE'},
-    )
-    @JoinColumn({ name: 'user_id'})
-    user: User;
-   */
-
+   
     @ManyToOne(
         type => User, user => user.order,
         {onUpdate: 'CASCADE', onDelete: 'CASCADE'},

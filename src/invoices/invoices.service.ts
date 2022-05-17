@@ -1,18 +1,15 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { PaginationQueryDto } from 'src/common/dto/pagination-query.dto';
-import { Connection,Repository } from 'typeorm';
+import { Repository } from 'typeorm';
 import { CreateInvoiceDto } from './dto/create-invoice.dto';
-import { UpdateInvoiceDto } from './dto/update-invoice.dto';
 import { Invoice } from './entities/invoice.entity';
-import { Event } from 'src/events/entities/event.entity';
 
 @Injectable()
 export class InvoicesService {// InvoicesService will be responsible for data storage and retieval.
     constructor(
       @InjectRepository(Invoice)
       private readonly invoiceRepository: Repository<Invoice>,
-      private readonly connection:Connection,
     ) {}
     // Interactions with data sources
     
@@ -42,22 +39,16 @@ export class InvoicesService {// InvoicesService will be responsible for data st
       return this.invoiceRepository.save(invoice);
     }
   
-    async update(id: string, updateInvoiceDto: UpdateInvoiceDto) {
-      const invoice = await this.invoiceRepository.preload({// Preload updates an existing entity. If not exists throws an exception
-        id: +id,
-        ...updateInvoiceDto,
-      });
-      if (!invoice) {
-        throw new NotFoundException(`Factura #${id} no encontrada`);
-      }
-      return this.invoiceRepository.save(invoice);
+    async update(updateInvoiceDto: CreateInvoiceDto) {
+      
+      return this.invoiceRepository.save(updateInvoiceDto);
     }
   
     async remove(id: string) {
       const invoice = await this.findOne(id);
       return this.invoiceRepository.remove(invoice);
     }
-    async recommendInvoice(invoice: Invoice) {
+    /*async recommendInvoice(invoice: Invoice) {
       const queryRunner = this.connection.createQueryRunner();
       
       await queryRunner.connect();
@@ -79,5 +70,5 @@ export class InvoicesService {// InvoicesService will be responsible for data st
       } finally {
         await queryRunner.release();
       }
-    }
+    }*/
 }

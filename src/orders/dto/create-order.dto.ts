@@ -4,6 +4,8 @@ import { IsString, IsNumber } from 'class-validator';
 
 export class CreateOrderDto {//All properties are read-only to maintain immutability
     @IsString()
+    uuid?: string;
+    @IsString()
     readonly date: string;
     @IsNumber()
     readonly amount: number;

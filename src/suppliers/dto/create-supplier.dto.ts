@@ -4,6 +4,8 @@ import { IsString } from "class-validator";
 
 export class CreateSupplierDto {//All properties are read-only to maintain immutability
     @IsString()
+    uuid?: string;
+    @IsString()
     readonly name: string;
     @IsString()
     readonly cif: string;

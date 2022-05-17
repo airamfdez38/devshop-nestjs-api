@@ -40,15 +40,9 @@ export class SuppliersService {// SuppliersService will be responsible for data 
         return this.supplierRepository.save(supplier);
       }
     
-      async update(id: string, updateSupplierDto: UpdateSupplierDto) {
-        const supplier = await this.supplierRepository.preload({
-          id: +id,
-          ...updateSupplierDto,
-        });
-        if (!supplier) {
-          throw new NotFoundException(`Proveedor #${id} no encontrado`);// Preload updates an existing entity. If not exists throws an exception
-        }
-        return this.supplierRepository.save(supplier);
+      async update(updateSupplierDto: CreateSupplierDto) {
+       
+        return this.supplierRepository.save(updateSupplierDto);
       }
     
       async remove(id: string) {

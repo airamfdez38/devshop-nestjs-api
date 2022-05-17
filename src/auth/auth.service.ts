@@ -1,6 +1,7 @@
 import { Injectable } from "@nestjs/common";
 import { JwtService } from "@nestjs/jwt";
 import { UsersService } from "src/users/users.service";
+import * as cripto from 'bcrypt';
 
 @Injectable()
 export class AuthService{
@@ -8,8 +9,8 @@ export class AuthService{
 
    async validateUserCredentials(email:string, password: string): Promise<any>{
        const user = await this.usersService.findByEmail(email);
-
-       if(user && user.password === password){
+    const encryptedPass = cripto.createHmac('sha256', password).digest('hex')
+       if(user && user.password === encryptedPass){
            const {password, ...result} = user;
            return result;
        }
