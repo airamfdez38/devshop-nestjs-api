@@ -24,8 +24,9 @@ export class AddressesController {
     findOne(@Param('id') id: number){
         return this.addressService.findOne('' + id);
     }
-    @Post()
+    
     // Body decorator as parameter for getting all or specific portion of the request
+    @Post()
     create(@Body() createAddressDto: CreateAddressDto){
         console.log(createAddressDto instanceof CreateAddressDto)
         return this.addressService.create(createAddressDto);

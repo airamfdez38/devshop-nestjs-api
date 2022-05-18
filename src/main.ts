@@ -14,7 +14,6 @@ async function bootstrap() {
   SwaggerModule.setup('api', app, document);
   app.useGlobalPipes(new ValidationPipe(
     {
-      whitelist: true,
       transform: true,
       forbidNonWhitelisted: true,
       transformOptions: {

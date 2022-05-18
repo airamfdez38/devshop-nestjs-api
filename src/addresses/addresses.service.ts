@@ -34,8 +34,8 @@ export class AddressesService { // AddressesService will be responsible for data
     }
   
     create(createAddressDto: CreateAddressDto) { 
-      const address = this.addressRepository.create(createAddressDto);
-      return this.addressRepository.save(address);
+      //const address = this.addressRepository.create(createAddressDto);
+      return this.addressRepository.save(createAddressDto);
     }
   
     async update(updateAddressDto: CreateAddressDto) {
