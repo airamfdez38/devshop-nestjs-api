@@ -11,4 +11,5 @@ export class CreateInvoiceDto {//All properties are read-only to maintain immuta
     @IsString()
     readonly payment_method: string;
     
+  
 }

@@ -14,4 +14,6 @@ export class CreateProductDto {//All properties are read-only to maintain immuta
     readonly price: number;
     @IsString()
     readonly category: string;
+    @IsString()
+    readonly image: string
 }

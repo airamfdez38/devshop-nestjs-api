@@ -21,8 +21,8 @@ export class Product{
     price: number;
     @Column()
     category: string;
-    @Column({default: 0})
-    recommendations: number;
+    @Column()
+    image: string
     
       // Entities relatiions
     @JoinTable()

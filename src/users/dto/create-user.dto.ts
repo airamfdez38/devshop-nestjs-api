@@ -18,4 +18,6 @@ export class CreateUserDto {//All properties are read-only to maintain immutabil
     readonly password: string;
     @IsString()
     readonly phone: string;
+    @IsString()
+    readonly image: string;
 }
