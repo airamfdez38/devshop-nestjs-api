@@ -11,8 +11,6 @@ export class Invoice{
     amount: number;
     @Column()
     payment_method: string;
-    @Column({default: 0})
-    recommendations: number;
 
     // Entities relations
     @JoinTable()

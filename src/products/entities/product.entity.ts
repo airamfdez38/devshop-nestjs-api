@@ -1,5 +1,6 @@
 import { Order } from "src/orders/entities/order.entity";
 import { Supplier } from '../../suppliers/entities/supplier.entity';
+import { ManyToMany } from 'typeorm';
 import { 
     Column,
     Entity,
@@ -26,7 +27,7 @@ export class Product{
     
       // Entities relatiions
     @JoinTable()
-    @ManyToOne(
+    @ManyToMany(
       type => Order,
       order=> order.product,
       {onUpdate: 'CASCADE', onDelete: 'CASCADE'},

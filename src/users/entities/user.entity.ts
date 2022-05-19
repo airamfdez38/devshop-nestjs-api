@@ -19,7 +19,7 @@ export class User{
     password: string;
     @Column()
     phone: string;
-    @Column()
+    @Column({nullable: true})
     image: string;
     @Column({ default: true })
     isActive: boolean;

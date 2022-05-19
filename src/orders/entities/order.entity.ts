@@ -1,7 +1,7 @@
 
 import { Product } from "src/products/entities/product.entity";
 import { User } from "src/users/entities/user.entity";
-import { Column, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn, ManyToOne, OneToMany, JoinTable } from 'typeorm';
+import { Column, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn, ManyToOne, OneToMany, JoinTable, ManyToMany } from 'typeorm';
 import { Invoice } from '../../invoices/entities/invoice.entity';
 
 @Entity('orders')
@@ -17,7 +17,7 @@ export class Order{ //sql table === 'order'
     
     // Entities relatiions
     @JoinTable()
-    @OneToMany(()=> Product,
+    @ManyToMany(()=> Product,
         product => product.order,
     {onUpdate: 'CASCADE', onDelete: 'CASCADE'},
     )
@@ -35,5 +35,5 @@ export class Order{ //sql table === 'order'
         type => User, user => user.order,
         {onUpdate: 'CASCADE', onDelete: 'CASCADE'},
     )
-    user: string;
+    user: User;
 }

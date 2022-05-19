@@ -21,8 +21,8 @@ export class AddressesController {
     /* Request that returns a result by its id.
     The @Param lets grab all incoming request parameters and use them 
     inside of the function body.*/
-    findOne(@Param('id') id: number){
-        return this.addressService.findOne('' + id);
+    findOne(@Param('id') id: string){
+        return this.addressService.findOne(id);
     }
     
     // Body decorator as parameter for getting all or specific portion of the request

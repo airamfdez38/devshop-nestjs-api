@@ -24,8 +24,8 @@ export class InvoicesController {
      /* Request that returns a result by its id.
     The @Param lets grab all incoming request parameters and use them 
     inside of the function body.*/
-    findOne(@Param('id') id: number){
-        return this.invoiceService.findOne('' + id);
+    findOne(@Param('id') id: string){
+        return this.invoiceService.findOne(id);
     }
     @Post()
     // Body decorator as parameter for getting all or specific portion of the request

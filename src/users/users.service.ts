@@ -14,15 +14,17 @@ export class UsersService {// UsersService will be responsible for data storage 
     private readonly userRepository: Repository<User>,
   ) { }
 
-  findAll(paginationQuery: PaginationQueryDto) {//Pagination helps us divide into consumable segment of information
+  async findAll(paginationQuery: PaginationQueryDto) {//Pagination helps us divide into consumable segment of information
     const { limit, offset } = paginationQuery;
-    return this.userRepository.find({
+    const users = await this.userRepository.find({
       relations: ['order', 'address'],
       skip: offset,// offset is the number of records we want to skip before selecting records.
       take: limit,//Limit is the number of records we want to take after skipping is done.
 
     }
     );
+    users.map((user:User) => delete user.password)
+    return users;
   }
 
   async findOne(id: string) {
@@ -41,10 +43,15 @@ export class UsersService {// UsersService will be responsible for data storage 
     })
   }
 
-  create(createUserDto: CreateUserDto) {
+  create(createUserDto: CreateUserDto):Promise<CreateUserDto> {
     const user = this.userRepository.create(createUserDto);
     user.password = cripto.createHmac('sha256', user.password).digest('hex')
     return this.userRepository.save(user);
+  }
+  async updatePassword( updateUserDto: CreateUserDto) {
+    const user = this.userRepository.create(updateUserDto);
+    user.password = cripto.createHmac('sha256', user.password).digest('hex')
+    return this.userRepository.save(updateUserDto);
   }
 
   async update( updateUserDto: CreateUserDto) {

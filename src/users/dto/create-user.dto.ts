@@ -1,6 +1,7 @@
 //DTO's let us create a definition for the shape of a data that is coming into the body of an application request
 
 import { IsString } from "class-validator";
+import { Address } from '../../addresses/entities/address.entity';
 
 
 export class CreateUserDto {//All properties are read-only to maintain immutability
@@ -20,4 +21,5 @@ export class CreateUserDto {//All properties are read-only to maintain immutabil
     readonly phone: string;
     @IsString()
     readonly image: string;
+
 }

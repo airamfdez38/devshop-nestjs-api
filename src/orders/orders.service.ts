@@ -16,7 +16,7 @@ export class OrdersService {// OrdersService will be responsible for data storag
       const {limit, offset} = paginationQuery;
 
       return this.orderRepository.find({
-        relations: ['invoice','product'],
+        relations: ['invoice','product','user'],
         skip: offset,// offset is the number of records we want to skip before selecting records.
         take: limit,//Limit is the number of records we want to take after skipping is done.
       });
@@ -24,7 +24,7 @@ export class OrdersService {// OrdersService will be responsible for data storag
   
     async findOne(id: string) {
       const order = await this.orderRepository.findOne(id, {
-        relations: ['order','invoice','product']
+        relations: ['order','invoice','product','user']
       });
       if (!order) {
         throw new NotFoundException(`Pedido #${id} no encontrado`);// Exception when the order doesn't exist in data source

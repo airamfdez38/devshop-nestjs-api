@@ -21,8 +21,8 @@ export class UsersController {
      /* Request that returns a result by its id.
     The @Param lets grab all incoming request parameters and use them 
     inside of the function body.*/
-    findOne(@Param('id') id: number){
-        return this.userService.findOne('' + id);
+    findOne(@Param('id') id: string){
+        return this.userService.findOne(id);
     }
     @Post()
     // Body decorator as parameter for getting all or specific portion of the request
@@ -39,6 +39,15 @@ export class UsersController {
     update( @Body() updateUserDto: CreateUserDto){
         return this.userService.update( updateUserDto);
     }
+
+    
+    @Patch('recover-password')
+    /* Needs of Param decorator that receives as parameter the product's id
+    and the Body parameter that is going to be the request body */
+    updatePassword( @Body() updateUserDto: CreateUserDto){
+        return this.userService.update( updateUserDto);
+    }
+
     // Method to remove a supplier by its id
     @Delete(':id')
     remove(@Param('id') id:string){

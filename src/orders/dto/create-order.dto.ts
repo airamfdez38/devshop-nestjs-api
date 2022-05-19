@@ -2,6 +2,7 @@
 
 import { IsString, IsNumber } from 'class-validator';
 import { Invoice } from '../../invoices/entities/invoice.entity';
+import { User } from '../../users/entities/user.entity';
 
 export class CreateOrderDto {//All properties are read-only to maintain immutability
     
@@ -13,5 +14,6 @@ export class CreateOrderDto {//All properties are read-only to maintain immutabi
     @IsNumber()
     readonly total: number;
   
-    invoice:Invoice
+    invoice:Invoice;
+    user:User
 }
