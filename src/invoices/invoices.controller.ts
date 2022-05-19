@@ -16,9 +16,8 @@ export class InvoicesController {
      //GET HTTP handler using a Nest decorator
     @Get()
     // Request that will be used to fetch all the results for this controller
-    findAll(@Query() paginationQuery:PaginationQueryDto){
-        //const {limit, offset} = paginationQuery;
-        return this.invoiceService.findAll(paginationQuery);
+    findAll(){
+        return this.invoiceService.findAll();
     }
     @Get(':id')
      /* Request that returns a result by its id.

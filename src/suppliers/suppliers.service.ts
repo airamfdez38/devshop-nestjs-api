@@ -15,12 +15,9 @@ export class SuppliersService {// SuppliersService will be responsible for data 
       ) {}
       // Interactions with data sources
       
-      findAll(paginationQuery: PaginationQueryDto) {//Pagination helps us divide into consumable segment of information
-        const {limit, offset} =paginationQuery;
+      findAll() {
         return this.supplierRepository.find({
           relations:['product'],
-          skip: offset,// offset is the number of records we want to skip before selecting records.
-          take: limit,//Limit is the number of records we want to take after skipping is done.
         });
       }
     

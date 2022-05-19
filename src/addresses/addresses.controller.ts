@@ -13,9 +13,8 @@ export class AddressesController {
     //GET HTTP handler using a Nest decorator
     @Get()
     // Request that will be used to fetch all the results for this controller
-    findAll(@Query() paginationQuery){
-        //const {limit, offset} = paginationQuery;
-        return this.addressService.findAll(paginationQuery);
+    findAll(){
+        return this.addressService.findAll();
     }
     @Get(':id')
     /* Request that returns a result by its id.

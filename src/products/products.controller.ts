@@ -16,9 +16,8 @@ export class ProductsController {
     @Get()
     // Request that will be used to fetch all the results for this controller
 
-    findAll(@Query() paginationQuery: PaginationQueryDto){
-        //const {limit, offset} = paginationQuery;
-        return this.productService.findAll(paginationQuery);
+    findAll(){
+        return this.productService.findAll();
     }
     @Get(':id')
     /* Request that returns a result by its id.

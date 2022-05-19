@@ -14,13 +14,11 @@ export class UsersService {// UsersService will be responsible for data storage 
     private readonly userRepository: Repository<User>,
   ) { }
 
-  async findAll(paginationQuery: PaginationQueryDto) {//Pagination helps us divide into consumable segment of information
-    const { limit, offset } = paginationQuery;
+  async findAll() {
+   
     const users = await this.userRepository.find({
       relations: ['order', 'address'],
-      skip: offset,// offset is the number of records we want to skip before selecting records.
-      take: limit,//Limit is the number of records we want to take after skipping is done.
-
+    
     }
     );
     users.map((user:User) => delete user.password)

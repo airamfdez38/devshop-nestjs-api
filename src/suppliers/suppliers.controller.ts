@@ -17,9 +17,8 @@ export class SuppliersController {
     @Get()
     // Request that will be used to fetch all the results for this controller
 
-    findAll(@Query() paginationQuery:PaginationQueryDto){
-        //const {limit, offset} = paginationQuery;
-        return this.supplierService.findAll(paginationQuery);
+    findAll(){
+        return this.supplierService.findAll();
     }
     @Get(':id')
      /* Request that returns a result by its id.
