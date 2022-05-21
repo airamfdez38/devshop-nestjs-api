@@ -20,7 +20,7 @@ export class ProductsService {// ProductsService will be responsible for data st
   
     async findOne(id: string) {
       const product = await this.productRepository.findOne(id, {
-        relations: ['order', 'supplier']
+        relations: ['supplier']
       });
       if (!product) {
         throw new NotFoundException(`Producto #${id} no encontrado`);// Exception when the order doesn't exist in data source

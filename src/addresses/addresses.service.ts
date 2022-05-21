@@ -22,7 +22,7 @@ export class AddressesService { // AddressesService will be responsible for data
   
     async findOne(id: string) {
       const address = await this.addressRepository.findOne(id, {
-        relations: ['address']
+        relations:['user'],
       });
       if (!address) {
         throw new NotFoundException(`Dirección #${id} no encontrada`); // Exception when the address doesn't exist in data source
@@ -42,7 +42,8 @@ export class AddressesService { // AddressesService will be responsible for data
   
     async remove(id: string) {
       const address = await this.findOne(id);
-      return this.addressRepository.remove(address);
+      console.log('entra', id)
+      return this.addressRepository.delete(id);
     }
    /* async recommendAddress(address: Address) {
       const queryRunner = this.connection.createQueryRunner();

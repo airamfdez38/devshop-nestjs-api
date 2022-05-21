@@ -4,8 +4,6 @@ import { Repository } from 'typeorm';
 import { CreateSupplierDto } from './dto/create-supplier.dto';
 import { UpdateSupplierDto } from './dto/update-supplier.dto';
 import { Supplier } from './entities/supplier.entity';
-import { PaginationQueryDto } from '../common/dto/pagination-query.dto';
-import { Event } from 'src/events/entities/event.entity';
 
 @Injectable()
 export class SuppliersService {// SuppliersService will be responsible for data storage and retieval.
