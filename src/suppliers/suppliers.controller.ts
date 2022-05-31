@@ -1,7 +1,4 @@
 import { Body, Controller, Delete, Get, Param, Patch, Post, Query, UseGuards,Request } from '@nestjs/common';
-import { AuthGuard } from '@nestjs/passport';
-import { AuthService } from './../auth/auth.service';
-import { PaginationQueryDto } from 'src/common/dto/pagination-query.dto';
 import { CreateSupplierDto } from './dto/create-supplier.dto';
 import { SuppliersService } from './suppliers.service';
 import { ApiTags } from '@nestjs/swagger';
@@ -9,7 +6,7 @@ import { ApiTags } from '@nestjs/swagger';
 @ApiTags('Suppliers')
 @Controller('suppliers')
 export class SuppliersController {
-    constructor(private readonly supplierService: SuppliersService, private authService: AuthService){
+    constructor(private readonly supplierService: SuppliersService){
 
     }
     //GET HTTP handler using a Nest decorator
@@ -48,10 +45,6 @@ export class SuppliersController {
     remove(@Param('id') id:string){
         return this.supplierService.remove(id)
     }
-    @UseGuards(AuthGuard('local'))
-    @Post('login')
-    async login(@Request() req) {
-        return this.authService.loginWithCredentials(req.user);
-    }
+
 
 }

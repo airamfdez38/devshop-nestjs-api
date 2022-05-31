@@ -1,17 +1,15 @@
 import { Body, Controller, Delete, Get, Param, Patch, Post, Query, UseGuards, Request } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
-import { AuthService } from './../auth/auth.service';
 import { PaginationQueryDto } from 'src/common/dto/pagination-query.dto';
 import { CreateOrderDto } from './dto/create-order.dto';
 import { UpdateOrderDto } from './dto/update-order.dto';
 import { OrdersService } from './orders.service';
-import { JwtAuthGuard } from './../auth/jwt-auth.guard';
 import { ApiTags } from '@nestjs/swagger';
 
 @ApiTags('Orders')
 @Controller('orders')
 export class OrdersController {
-    constructor(private readonly orderService: OrdersService, private authService: AuthService){
+    constructor(private readonly orderService: OrdersService, ){
 
     }
     //GET HTTP handler using a Nest decorator
@@ -50,14 +48,5 @@ export class OrdersController {
     remove(@Param('id') id:string){
         return this.orderService.remove(id)
     }
-    @UseGuards(AuthGuard('local'))
-    @Post('login')
-    async login(@Request() req) {
-        return this.authService.loginWithCredentials(req.user);
-    }
-    @UseGuards(JwtAuthGuard)
-    @Get('user-info')
-    getUserInfo(@Request() req) {
-      return req.user
-    }
+    
 }

@@ -22,7 +22,7 @@ export class Product{
     price: number;
     @Column()
     category: string;
-    @Column()
+    @Column({nullable: true})
     image: string
     
       // Entities relatiions

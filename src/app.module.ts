@@ -8,11 +8,7 @@ import { ProductsModule } from './products/products.module';
 import { SuppliersModule } from './suppliers/suppliers.module';
 import { InvoicesModule } from './invoices/invoices.module';
 import { AddressesModule } from './addresses/addresses.module';
-import { UserRatingModule } from './user-rating/user-rating.module';
-import { ProductRatingModule } from './product-rating/product-rating.module';
-import { OrderRatingModule } from './order-rating/order-rating.module';
-import { InvoiceRatingModule } from './invoice-rating/invoice-rating.module';
-import { AddressRatingModule } from './address-rating/address-rating.module';
+import { AuthenticationModule } from './authentication/authentication.module';
 
 @Module({
   imports: [UsersModule, TypeOrmModule.forRoot({
@@ -24,7 +20,7 @@ import { AddressRatingModule } from './address-rating/address-rating.module';
     database: 'postgres', 
     autoLoadEntities: true, 
     synchronize: true, 
-  }), OrdersModule, ProductsModule, SuppliersModule, InvoicesModule, AddressesModule, UserRatingModule, ProductRatingModule, OrderRatingModule, InvoiceRatingModule, AddressRatingModule],
+  }),AuthenticationModule, OrdersModule, ProductsModule, SuppliersModule, InvoicesModule, AddressesModule],
   controllers: [AppController],
   providers: [AppService],
 })

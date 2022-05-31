@@ -1,16 +1,12 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post, Query, Request,UseGuards } from '@nestjs/common';
-import { AuthGuard } from '@nestjs/passport';
-import { AuthService } from './../auth/auth.service';
-import { PaginationQueryDto } from 'src/common/dto/pagination-query.dto';
+import { Body, Controller, Delete, Get, Param, Patch, Post, } from '@nestjs/common';
 import { CreateInvoiceDto } from './dto/create-invoice.dto';
-import { UpdateInvoiceDto } from './dto/update-invoice.dto';
 import { InvoicesService } from './invoices.service';
 import { ApiTags } from '@nestjs/swagger';
 
 @ApiTags('Invoices')
 @Controller('invoices')
 export class InvoicesController {
-    constructor(private readonly invoiceService: InvoicesService, private authService: AuthService){
+    constructor(private readonly invoiceService: InvoicesService, ){
 
     }
      //GET HTTP handler using a Nest decorator
@@ -44,9 +40,5 @@ export class InvoicesController {
     remove(@Param('id') id:string){
         return this.invoiceService.remove(id)
     }
-    @UseGuards(AuthGuard('local'))
-    @Post('login')
-    async login(@Request() req) {
-        return this.authService.loginWithCredentials(req.user);
-    }
+  
 }
