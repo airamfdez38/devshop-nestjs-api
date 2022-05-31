@@ -12,9 +12,7 @@ export class UpdateUserDto {
     readonly dni: string;
     @IsString()
     readonly email: string;
-    
     @IsString()
     readonly phone: string;
-    @IsString()
-    readonly image: string;
+
 }

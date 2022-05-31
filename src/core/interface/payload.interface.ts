@@ -1,4 +1,6 @@
+import { UpdateUserDto } from "src/users/dto/update-user.dto";
+
 export interface IPayload {
-    userId: string;
+    user: UpdateUserDto;
     expiration?: string;
 }

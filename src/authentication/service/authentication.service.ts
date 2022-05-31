@@ -9,6 +9,7 @@ import { User } from 'src/users/entities/user.entity';
 import { UsersService } from "src/users/users.service";
 import { IAccessToken } from "src/core/interface/access-token.interface";
 import { IPayload } from "src/core/interface/payload.interface";
+import { addHours, format } from "date-fns";
 
 
 @Injectable()
@@ -39,8 +40,10 @@ export class AuthenticationService {
   }
 
   async generateAccessToken(userEmail: string): Promise<IAccessToken> {
+    const now = new Date();
+    const twoHoursExpiration = format(addHours(now, 2),'t');
     const user = await this.userService.findByEmail(userEmail),
-      payload: IPayload = { userId: user.uuid };
+      payload: IPayload = { user: user, expiration: twoHoursExpiration };
     delete user.password;
     return { accessToken: this.jwtService.sign(payload) };
   }
