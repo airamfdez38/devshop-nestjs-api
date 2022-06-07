@@ -13,13 +13,12 @@ import { AuthenticationModule } from './authentication/authentication.module';
 @Module({
   imports: [UsersModule, TypeOrmModule.forRoot({
     type: 'postgres',
-    host: 'localhost', 
-    port: 5432, 
-    username: 'postgres',
-    password: 'pass123', 
-    database: 'postgres', 
+    url: process.env.DATABASE_URL,
     autoLoadEntities: true, 
     synchronize: true, 
+    ssl: {
+      rejectUnauthorized: false
+    },
   }),AuthenticationModule, OrdersModule, ProductsModule, SuppliersModule, InvoicesModule, AddressesModule],
   controllers: [AppController],
   providers: [AppService],
