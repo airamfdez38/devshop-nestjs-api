@@ -48,4 +48,9 @@ export class ProductsController {
         return this.productService.remove(id)
     }
 
+    @Get('category/:cat')
+    findByCategory(@Param('cat') cat: string){
+        return this.productService.findByCategory(cat)
+    }
+
 }

@@ -27,6 +27,10 @@ export class ProductsService {// ProductsService will be responsible for data st
       }
       return product;
     }
+
+    async findByCategory(cat: string) : Promise<Product[]>{
+      return this.productRepository.find({where:{category:cat}})
+    }
   
     create(createProductDto: CreateProductDto) {
       const product = this.productRepository.create(createProductDto);
